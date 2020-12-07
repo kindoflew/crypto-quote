@@ -15,7 +15,7 @@
     if (nonTextInput) {
       dispatch("handleChange", { index, guess: character });
     }
-    return () => (guess = "");
+    return () => guess = "";
   });
 
   function handleInput() {
@@ -43,9 +43,7 @@
     if (index === inputs.length - 1) {
       nextIndex = 0;
     }
-    while (
-      document.getElementById(`${nextIndex}`).classList.contains("hidden")
-    ) {
+    while (document.getElementById(`${nextIndex}`).classList.contains("hidden")) {
       nextIndex += 1;
     }
     document.getElementById(`${nextIndex}`).focus();
@@ -110,7 +108,7 @@
   .hidden {
     border: none;
     background-color: transparent;
-    color: black;
+    color: var(--font-color);
   }
 
   .highlight {
