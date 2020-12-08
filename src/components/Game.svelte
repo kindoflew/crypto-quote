@@ -88,8 +88,6 @@
   />
 {/if}
 
-<!--<p>Solved: {solved} {answer.join('')}</p>-->
-
 <style>
   section {
     display: flex;
