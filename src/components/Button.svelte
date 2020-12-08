@@ -21,6 +21,6 @@
   }
 
   button:active {
-    transform: scale(90%);
+    transform: scale(0.95);
   }
 </style>
