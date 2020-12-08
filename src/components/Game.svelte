@@ -97,7 +97,7 @@
     align-items: center;
     flex-wrap: wrap;
     min-height: 70vh;
-    width: 50vw;
+    width: 60vw;
     margin: 2rem auto;
     margin-bottom: 1rem;
     padding: 2rem;
@@ -116,7 +116,17 @@
 
   .button-wrapper {
     display: flex;
-    width: calc(50vw + 4rem);
+    width: calc(60vw + 4rem);
     justify-content: space-between;
+  }
+
+  @media (max-width: 1000px) {
+    section {
+      width: 80vw;
+    }
+
+    .button-wrapper {
+      width: calc(80vw + 4rem);
+    }
   }
 </style>

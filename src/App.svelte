@@ -34,4 +34,10 @@
     align-items: center;
     background-color: var(--main-bg);
   }
+
+  @media (max-width: 550px) {
+    :global(html) {
+      font-size: calc(0.5em + 1vw);
+    }
+  }
 </style>

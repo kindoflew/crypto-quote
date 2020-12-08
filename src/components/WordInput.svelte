@@ -38,4 +38,10 @@
     display: flex;
     justify-content: right;
   }
+
+  @media (max-width: 700px) {
+    .right-align {
+      flex: 0 1 0;
+    }
+  }
 </style>
