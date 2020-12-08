@@ -8,14 +8,14 @@
   let quote;
   let cryptArray;
   let answer = [];
-  let solved = false;
-  let revealed = false;
-  let ready = false;
+  let solved;
+  let revealed;
+  let ready;
 
-  $: answer.join("") === quote ? solved = true : solved = false;
+  $: solved = (answer.join("") === quote) ? true : false;
 
-  onMount(async () => {
-    await newQuote();
+  onMount(() => {
+    newQuote();
   });
 
   async function newQuote() {
@@ -38,11 +38,13 @@
     //along with corresponding index in answer
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].value = event.detail.guess;
+      //all input ids are their index in the quote/answer
       answer[inputs[i].id] = event.detail.guess.toUpperCase();
     }
   }
 
   function revealAnswer() {
+    //if answer was revealed, don't show success modal
     revealed = true;
     for (let i = 0; i < quote.length; i++) {
       document.getElementById(`${i}`).value = quote[i];
@@ -123,7 +125,7 @@
     font-size: 1.5rem;
     border: none;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px #3d1c019c;
+    box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
     padding: 1rem;
     cursor: pointer;
   }
