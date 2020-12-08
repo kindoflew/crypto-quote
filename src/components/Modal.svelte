@@ -35,7 +35,7 @@
     padding: 2rem;
     width: 40vw;
     text-align: center;
-    box-shadow: 5px 5px 5px #3d1c019c;
+    box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
   }
 
   .message {
@@ -52,7 +52,7 @@
     font-size: 1.5rem;
     border: none;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px #3d1c019c;
+    box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
     padding: 1rem;
     cursor: pointer;
   }

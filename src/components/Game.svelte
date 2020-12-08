@@ -103,7 +103,7 @@
     border-radius: 10px;
     background-color: var(--game-bg);
     color: var(--font-color);
-    box-shadow: 5px 5px 5px #3d1c019c;
+    box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
   }
   h1 {
     flex: 1 0 100%;
