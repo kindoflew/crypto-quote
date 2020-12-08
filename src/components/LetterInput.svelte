@@ -8,7 +8,7 @@
 
   const dispatch = createEventDispatcher();
 
-  $: if (guess.length > 0) handleTabbing();
+  $: if (guess) handleTabbing();
   $: dispatch("handleChange", { index, guess });
 
   onMount(() => {
