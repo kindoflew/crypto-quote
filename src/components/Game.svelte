@@ -3,13 +3,14 @@
   import { fetchQuote } from "./fetchQuote.js";
   import { cryptQuote } from "./cryptQuote.js";
   import WordInput from "./WordInput.svelte";
+  import Button from "./Button.svelte";
   import Modal from "./Modal.svelte";
 
   let quote;
   let cryptArray;
   let answer = [];
   let solved;
-  let revealed;
+  let revealed = false;
   let ready;
 
   $: solved = (answer.join("") === quote) ? true : false;
@@ -74,9 +75,9 @@
   {/if}
 </section>
 <div class="button-wrapper">
-  <button on:click={reset}> Reset </button>
-  <button on:click={revealAnswer}> Reveal Answer </button>
-  <button on:click={newQuote}> New Quote </button>
+  <Button content="Reset" clickFunction={reset} />
+  <Button content="Reveal Answer" clickFunction={revealAnswer} />
+  <Button content="New Quote" clickFunction={newQuote} />
 </div>
 
 {#if solved && !revealed}
@@ -117,23 +118,5 @@
     display: flex;
     width: calc(50vw + 4rem);
     justify-content: space-between;
-  }
-
-  button {
-    background-color: var(--game-bg);
-    color: var(--font-color);
-    font-size: 1.5rem;
-    font-family: inherit;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
-    margin: 0;
-    padding: 1rem;
-    cursor: pointer;
-  }
-
-  button:active {
-    transform: scale(90%);
   }
 </style>
