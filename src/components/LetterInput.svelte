@@ -93,10 +93,6 @@
     display: block;
   }
 
-  input:focus {
-    background-color: var(--main-bg);
-  }
-
   input {
     font-size: 1.5rem;
     font-family: inherit;
@@ -111,10 +107,16 @@
     text-transform: uppercase;
   }
 
+  input:focus {
+    background-color: var(--main-bg);
+  }
+
   .hidden {
     border: none;
     background-color: transparent;
     color: var(--font-color);
+    -webkit-text-fill-color: var(--font-color);
+    opacity: 1;
     width: 1.3rem;
   }
 
