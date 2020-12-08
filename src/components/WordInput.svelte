@@ -2,12 +2,13 @@
   import { fade } from "svelte/transition";
   import LetterInput from "./LetterInput.svelte";
   export let word;
+  let hyphen = word[0].includes('—');
 </script>
 
-{#if word[0].includes('—')}
+{#if hyphen}
   <div class="linebreak" />
 {/if}
-<div in:fade class={word[0].includes('—') ? 'right-align' : ''}>
+<div in:fade class:right-align={hyphen}>
   <!--[0] is the letter, [1] is the original index in the string-->
   {#each word as character (character[1])}
     <LetterInput
