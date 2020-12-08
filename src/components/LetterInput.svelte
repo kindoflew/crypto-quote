@@ -115,6 +115,7 @@
     border: none;
     background-color: transparent;
     color: var(--font-color);
+    width: 1.3rem;
   }
 
   .highlight {
