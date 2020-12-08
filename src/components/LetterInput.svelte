@@ -90,6 +90,7 @@
     text-align: center;
     border-radius: 2px;
     font-size: 1.5rem;
+    display: block;
   }
 
   input:focus {
@@ -98,9 +99,14 @@
 
   input {
     font-size: 1.5rem;
+    font-family: inherit;
     width: 1.8rem;
     height: 1.8rem;
     padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
     text-align: center;
     text-transform: uppercase;
   }
