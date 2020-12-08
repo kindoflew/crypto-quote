@@ -12,10 +12,10 @@
   $: dispatch("handleChange", { index, guess });
 
   onMount(() => {
+    guess = "";
     if (nonTextInput) {
       dispatch("handleChange", { index, guess: character });
     }
-    return () => guess = "";
   });
 
   function handleInput() {
