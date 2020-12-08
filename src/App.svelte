@@ -33,6 +33,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--main-bg);
+    padding-bottom: 0.5rem;
   }
 
   @media (max-width: 550px) {
