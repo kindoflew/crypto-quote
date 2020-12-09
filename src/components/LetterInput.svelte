@@ -37,8 +37,7 @@
     let inputs = document.querySelectorAll(`input.${character}`);
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].classList.add("highlight");
-    }
-    input.select();
+    } 
   }
 
   function handleBlur() {
@@ -73,6 +72,7 @@
       on:focus={handleFocus}
       on:blur={handleBlur}
       on:input={handleInput}
+      on:click={() => input.select()}
     />
     <label for={index} class={character}>{character}</label>
   </div>
