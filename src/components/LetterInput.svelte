@@ -74,6 +74,7 @@
       on:focus={handleFocus}
       on:blur={handleBlur}
       on:input={handleInput}
+      on:contextmenu|preventDefault
     />
     <label for={index} class={character}>{character}</label>
   </div>
