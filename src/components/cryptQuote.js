@@ -66,9 +66,9 @@ function quoteMappedByWord(array) {
   let newArray = [];
   let tmpArray = [];
   for (let i = 0; i < array.length; i++) {
-    tmpArray = [...tmpArray, [array[i], i]];
+    tmpArray.push([array[i], i]);
     if (array[i] === " " || i === array.length - 1) {
-      newArray = [...newArray, tmpArray];
+      newArray.push(tmpArray);
       tmpArray = [];
     }
   }
