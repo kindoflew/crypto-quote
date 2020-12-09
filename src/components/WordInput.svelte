@@ -1,7 +1,9 @@
 <script>
   import { fade } from "svelte/transition";
   import LetterInput from "./LetterInput.svelte";
+
   export let word;
+  export let answer;
   let hyphen = word[0].includes('—');
 </script>
 
@@ -9,12 +11,11 @@
   <div class="linebreak" />
 {/if}
 <div in:fade class:right-align={hyphen}>
-  <!--[0] is the letter, [1] is the original index in the string-->
-  {#each word as character (character[1])}
+  {#each word as [character, index] (index)}
     <LetterInput
-      character={character[0]}
-      index={character[1]}
-      on:handleChange
+      character={character}
+      index={index}
+      bind:value={answer[index]}
       on:handleInput
     />
   {/each}

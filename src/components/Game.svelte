@@ -13,7 +13,7 @@
   let revealed = false;
   let ready;
 
-  $: solved = (answer.join("") === quote) ? true : false;
+  $: solved = (answer.join("").toUpperCase() === quote) ? true : false;
 
   onMount(() => {
     newQuote();
@@ -21,26 +21,19 @@
 
   async function newQuote() {
     ready = false;
-    revealed = false;
-    answer = [];
     quote = await fetchQuote();
     cryptArray = cryptQuote(quote);
+    answer = Array.from({length: quote.length}, () => (''));
+    revealed = false;
     ready = true;
   }
 
-  function handleChange(event) {
-    answer[event.detail.index] = event.detail.guess.toUpperCase();
-  }
-
   function handleInput(event) {
-    //inputs' classes are their character value
+    //all input classes are their character value
     let inputs = document.querySelectorAll(`input.${event.detail.character}`);
-    //Any time a letter is input, all identical letter inputs get updated
-    //along with corresponding index in answer
     for (let i = 0; i < inputs.length; i++) {
-      inputs[i].value = event.detail.guess;
       //all input ids are their index in the quote/answer
-      answer[inputs[i].id] = event.detail.guess.toUpperCase();
+      answer[inputs[i].id] = event.detail.value.toUpperCase();
     }
   }
 
@@ -48,7 +41,6 @@
     //if answer was revealed, don't show success modal
     revealed = true;
     for (let i = 0; i < quote.length; i++) {
-      document.getElementById(`${i}`).value = quote[i];
       answer[i] = quote[i];
     }
   }
@@ -56,7 +48,6 @@
   function reset() {
     let inputs = document.querySelectorAll('input:not(.hidden)');
     for (let i = 0; i < inputs.length; i++) {
-      inputs[i].value = '';
       answer[inputs[i].id] = '';
     }
   }
@@ -67,8 +58,8 @@
   {#if ready}
     {#each cryptArray as word, index (index)}
       <WordInput
-        {word}
-        on:handleChange={handleChange}
+        word={word}
+        bind:answer={answer}
         on:handleInput={handleInput}
       />
     {/each}

@@ -1,25 +1,36 @@
 <script>
-  import { onMount, createEventDispatcher } from "svelte";
+  import { onMount, tick, createEventDispatcher } from "svelte";
+
   export let character;
   export let index;
-  let guess = "";
+  export let value = "";
   let input;
   let nonTextInput;
 
   const dispatch = createEventDispatcher();
 
-  $: if (guess) handleTabbing();
-  $: dispatch("handleChange", { index, guess });
-
   onMount(() => {
-    guess = "";
     if (nonTextInput) {
-      dispatch("handleChange", { index, guess: character });
+      value = character;
     }
   });
 
-  function handleInput() {
-    dispatch("handleInput", { character, guess });
+  async function handleInput() {
+    dispatch("handleInput", { character, value });
+    await tick();
+    handleTabbing();
+  }
+
+  function handleTabbing() {
+    let nextIndex = index + 1;
+    let inputs = document.querySelectorAll("input");
+    if (index === inputs.length - 1) {
+      nextIndex = 0;
+    }
+    while (document.getElementById(`${nextIndex}`).classList.contains("hidden")) {
+      nextIndex += 1;
+    }
+    document.getElementById(`${nextIndex}`).focus();
   }
 
   function handleFocus() {
@@ -36,18 +47,6 @@
       inputs[i].classList.remove("highlight");
     }
   }
-
-  function handleTabbing() {
-    let nextIndex = index + 1;
-    let inputs = document.querySelectorAll("input");
-    if (index === inputs.length - 1) {
-      nextIndex = 0;
-    }
-    while (document.getElementById(`${nextIndex}`).classList.contains("hidden")) {
-      nextIndex += 1;
-    }
-    document.getElementById(`${nextIndex}`).focus();
-  }
 </script>
 
 {#if character.match(/\W/)}
@@ -56,7 +55,7 @@
       type="text"
       id={index}
       class="hidden"
-      bind:value={character}
+      bind:value
       bind:this={nonTextInput}
       disabled
     />
@@ -69,7 +68,7 @@
       id={index}
       maxlength="1"
       bind:this={input}
-      bind:value={guess}
+      bind:value
       class={character}
       on:focus={handleFocus}
       on:blur={handleBlur}
