@@ -118,4 +118,16 @@
       width: calc(80vw + 4rem);
     }
   }
+
+  @media (max-width: 550px) {
+    section {
+      width: 85vw;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .button-wrapper {
+      width: calc(85vw + 2rem);
+    }
+  }
 </style>
