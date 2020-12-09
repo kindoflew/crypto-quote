@@ -73,6 +73,7 @@
       on:focus={handleFocus}
       on:blur={handleBlur}
       on:input={handleInput}
+      on:select|stopPropagation
     />
     <label for={index} class={character}>{character}</label>
   </div>
