@@ -46,4 +46,10 @@
   p {
     font-size: 1.5rem;
   }
+
+  @media(max-width: 1000px) {
+    div {
+      width: 70vw;
+    }
+  }
 </style>
