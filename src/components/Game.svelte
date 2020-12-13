@@ -2,18 +2,18 @@
   import { onMount } from "svelte";
   import { fetchQuote } from "./fetchQuote.js";
   import { cryptQuote } from "./cryptQuote.js";
+  import { answer } from "./store.js";
   import WordInput from "./WordInput.svelte";
   import Button from "./Button.svelte";
   import Modal from "./Modal.svelte";
 
   let quote;
   let cryptArray;
-  let answer = [];
   let solved;
   let revealed = false;
   let ready;
 
-  $: solved = (answer.join("").toUpperCase() === quote) ? true : false;
+  $: solved = ($answer.join("") === quote) ? true : false;
 
   onMount(() => {
     newQuote();
@@ -23,32 +23,23 @@
     ready = false;
     quote = await fetchQuote();
     cryptArray = cryptQuote(quote);
-    answer = Array.from({length: quote.length}, () => (''));
+    answer.set(Array.from({length: quote.length}, () => ("")));
     revealed = false;
     ready = true;
-  }
-
-  function handleInput(event) {
-    //all input classes are their character value
-    let inputs = document.querySelectorAll(`input.${event.detail.character}`);
-    for (let i = 0; i < inputs.length; i++) {
-      //all input ids are their index in the quote/answer
-      answer[inputs[i].id] = event.detail.value.toUpperCase();
-    }
   }
 
   function revealAnswer() {
     //if answer was revealed, don't show success modal
     revealed = true;
     for (let i = 0; i < quote.length; i++) {
-      answer[i] = quote[i];
+      $answer[i] = quote[i];
     }
   }
 
   function reset() {
     let inputs = document.querySelectorAll('input:not(.hidden)');
     for (let i = 0; i < inputs.length; i++) {
-      answer[inputs[i].id] = '';
+      $answer[inputs[i].id] = '';
     }
   }
 </script>
@@ -57,11 +48,7 @@
   <h1>Crypto.quote()</h1>
   {#if ready}
     {#each cryptArray as word, index (index)}
-      <WordInput
-        word={word}
-        bind:answer={answer}
-        on:handleInput={handleInput}
-      />
+      <WordInput {word} />
     {/each}
   {/if}
 </section>

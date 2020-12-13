@@ -3,7 +3,6 @@
   import LetterInput from "./LetterInput.svelte";
 
   export let word;
-  export let answer;
   let hyphen = word[0].includes('—');
 </script>
 
@@ -12,12 +11,7 @@
 {/if}
 <div in:fade class:right-align={hyphen}>
   {#each word as [character, index] (index)}
-    <LetterInput
-      character={character}
-      index={index}
-      bind:value={answer[index]}
-      on:handleInput
-    />
+    <LetterInput {character} {index} />
   {/each}
 </div>
 

@@ -1,22 +1,23 @@
 <script>
-  import { onMount, tick, createEventDispatcher } from "svelte";
+  import { onMount, tick } from "svelte";
+  import { answer } from "./store.js";
 
   export let character;
   export let index;
-  export let value = "";
   let input;
-  let nonTextInput;
-
-  const dispatch = createEventDispatcher();
+  let hiddenInput;
 
   onMount(() => {
-    if (nonTextInput) {
-      value = character;
+    if (hiddenInput) {
+      $answer[index] = character;
     }
   });
 
   async function handleInput() {
-    dispatch("handleInput", { character, value });
+    let inputs = document.querySelectorAll(`input.${character}`);
+    for (let i = 0; i < inputs.length; i++) {
+      $answer[inputs[i].id] = $answer[index].toUpperCase();
+    }
     await tick();
     handleTabbing();
   }
@@ -54,8 +55,8 @@
       type="text"
       id={index}
       class="hidden"
-      bind:value
-      bind:this={nonTextInput}
+      bind:value={$answer[index]}
+      bind:this={hiddenInput}
       disabled
     />
     <label for={index} style="color: transparent">{character}</label>
@@ -65,10 +66,10 @@
     <input
       type="text"
       id={index}
+      class={character}
       maxlength="1"
       bind:this={input}
-      bind:value
-      class={character}
+      bind:value={$answer[index]}
       on:focus={handleFocus}
       on:blur={handleBlur}
       on:input={handleInput}
