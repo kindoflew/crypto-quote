@@ -34,17 +34,10 @@
     document.getElementById(`${nextIndex}`).focus();
   }
 
-  function handleFocus() {
+  function handleHighlight() {
     let inputs = document.querySelectorAll(`input.${character}`);
     for (let i = 0; i < inputs.length; i++) {
-      inputs[i].classList.add("highlight");
-    } 
-  }
-
-  function handleBlur() {
-    let inputs = document.querySelectorAll(`input.${character}`);
-    for (let i = 0; i < inputs.length; i++) {
-      inputs[i].classList.remove("highlight");
+      inputs[i].classList.toggle("highlight");
     }
   }
 </script>
@@ -70,8 +63,8 @@
       maxlength="1"
       bind:this={input}
       bind:value={$answer[index]}
-      on:focus={handleFocus}
-      on:blur={handleBlur}
+      on:focus={handleHighlight}
+      on:blur={handleHighlight}
       on:input={handleInput}
       on:click={() => input.select()}
     />
