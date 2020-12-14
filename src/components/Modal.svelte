@@ -7,7 +7,9 @@
   const dispatch = createEventDispatcher();
 
 </script>
-<svelte:window on:keyup|preventDefault={(e) => e.key === 'Escape' && dispatch('closeModal')}/> 
+
+<svelte:window on:keyup|preventDefault={(e) => e.key === 'Escape' && dispatch('closeModal')}/>
+ 
 <section on:click|self={() => dispatch('closeModal')}>
   <div>
     <p class="message">You did it!</p>
@@ -41,10 +43,12 @@
 
   .message {
     font-size: 3rem;
+    margin-top: 0;
   }
 
   p {
     font-size: 1.5rem;
+    margin-bottom: 3rem;
   }
 
   @media(max-width: 1000px) {

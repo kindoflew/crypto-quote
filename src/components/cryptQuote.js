@@ -28,20 +28,20 @@ const BASE_CIPHER = {
 };
 
 export function cryptQuote(string) {
-  const cipher = applyCipher(BASE_CIPHER);
+  const cipher = generateCipher(BASE_CIPHER);
   let strArr = string.split("");
-  let newArr = [];
+  let cryptArr = [];
   strArr.forEach((character) => {
     if (character.match(/\W/)) {
-      newArr.push(character);
+      cryptArr.push(character);
     } else {
-      newArr.push(cipher[character]);
+      cryptArr.push(cipher[character]);
     }
   });
-  return quoteMappedByWord(newArr);
+  return quoteMappedByWord(cryptArr);
 }
 
-function applyCipher(obj) {
+function generateCipher(obj) {
   let newObj = {};
   let keys = Object.keys(obj);
   let newValues = shuffleArray(Object.values(obj));
@@ -52,10 +52,10 @@ function applyCipher(obj) {
 }
 
 function shuffleArray(array) {
-  const shuffled = array.slice();
+  let shuffled = array.slice();
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * i);
-    const temp = shuffled[i];
+    let j = Math.floor(Math.random() * i);
+    let temp = shuffled[i];
     shuffled[i] = shuffled[j];
     shuffled[j] = temp;
   }

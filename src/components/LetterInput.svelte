@@ -61,8 +61,8 @@
       id={index}
       class={character}
       maxlength="1"
-      bind:this={input}
       bind:value={$answer[index]}
+      bind:this={input}
       on:focus={handleHighlight}
       on:blur={handleHighlight}
       on:input={handleInput}

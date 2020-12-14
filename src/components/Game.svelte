@@ -60,7 +60,7 @@
   </div>
 
   {#if solved && !revealed}
-    <Modal {revealed} {quote} on:closeModal={() => (revealed = true)} />
+    <Modal {quote} on:closeModal={() => (revealed = true)} />
   {/if}
 </main>
 
