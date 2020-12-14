@@ -89,6 +89,7 @@
     color: var(--font-color);
     box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
   }
+  
   h1 {
     flex: 1 0 100%;
     font-size: 2.5rem;
