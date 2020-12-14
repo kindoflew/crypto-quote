@@ -13,7 +13,7 @@
   let revealed = false;
   let ready;
 
-  $: solved = ($answer.join("") === quote) ? true : false;
+  $: solved = $answer.join("") === quote ? true : false;
 
   onMount(() => {
     newQuote();
@@ -23,7 +23,7 @@
     ready = false;
     quote = await fetchQuote();
     cryptArray = cryptQuote(quote);
-    answer.set(Array.from({length: quote.length}, () => ("")));
+    answer.set(Array.from({ length: quote.length }, () => ""));
     revealed = false;
     ready = true;
   }
@@ -37,36 +37,43 @@
   }
 
   function reset() {
-    let inputs = document.querySelectorAll('input:not(.hidden)');
+    let inputs = document.querySelectorAll("input:not(.hidden)");
     for (let i = 0; i < inputs.length; i++) {
-      $answer[inputs[i].id] = '';
+      $answer[inputs[i].id] = "";
     }
   }
 </script>
 
-<section>
-  <h1>Crypto.quote()</h1>
-  {#if ready}
-    {#each cryptArray as word, index (index)}
-      <WordInput {word} />
-    {/each}
-  {/if}
-</section>
-<div class="button-wrapper">
-  <Button content="Reset" clickFunction={reset} />
-  <Button content="Reveal Answer" clickFunction={revealAnswer} />
-  <Button content="New Quote" clickFunction={newQuote} />
-</div>
+<main>
+  <section>
+    <h1>Crypto.quote()</h1>
+    {#if ready}
+      {#each cryptArray as word, index (index)}
+        <WordInput {word} />
+      {/each}
+    {/if}
+  </section>
+  <div class="button-wrapper">
+    <Button content="Reset" clickFunction={reset} />
+    <Button content="Reveal Answer" clickFunction={revealAnswer} />
+    <Button content="New Quote" clickFunction={newQuote} />
+  </div>
 
-{#if solved && !revealed}
-  <Modal
-    {revealed}
-    {quote}
-    on:closeModal={() => revealed = true}
-  />
-{/if}
+  {#if solved && !revealed}
+    <Modal {revealed} {quote} on:closeModal={() => (revealed = true)} />
+  {/if}
+</main>
 
 <style>
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-bg);
+    padding-bottom: 0.5rem;
+  }
+
   section {
     display: flex;
     justify-content: flex-start;

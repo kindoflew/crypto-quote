@@ -2,12 +2,10 @@
   import Game from "./components/Game.svelte";
 </script>
 
-<main>
-  <Game />
-</main>
+<Game />
 
 <style>
-  :root {
+  :global(:root) {
     --font-color: #2e2300;
     --main-bg: #c05805;
     --game-bg: #db9501;
@@ -25,15 +23,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  }
-
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--main-bg);
-    padding-bottom: 0.5rem;
   }
 
   @media (max-width: 550px) {
