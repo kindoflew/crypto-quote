@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
-  import { fetchQuote } from "./fetchQuote.js";
-  import { cryptQuote } from "./cryptQuote.js";
-  import { answer } from "./store.js";
+  import { fetchQuote } from "../utils/fetchQuote.js";
+  import { cryptQuote } from "../utils/cryptQuote.js";
+  import { answer } from "../utils/store.js";
   import WordInput from "./WordInput.svelte";
   import Button from "./Button.svelte";
   import Modal from "./Modal.svelte";
