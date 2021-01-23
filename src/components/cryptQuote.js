@@ -29,9 +29,8 @@ const BASE_CIPHER = {
 
 export function cryptQuote(string) {
   const cipher = generateCipher(BASE_CIPHER);
-  let strArr = string.split("");
   let cryptArr = [];
-  strArr.forEach((character) => {
+  string.split("").forEach((character) => {
     if (character.match(/\W/)) {
       cryptArr.push(character);
     } else {
