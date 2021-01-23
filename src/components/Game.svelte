@@ -81,7 +81,7 @@
     flex-wrap: wrap;
     min-height: 70vh;
     width: 60vw;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
     margin-bottom: 1rem;
     padding: 2rem;
     border-radius: 10px;
