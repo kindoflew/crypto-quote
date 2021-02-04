@@ -7,13 +7,12 @@
   import Button from "./Button.svelte";
   import Modal from "./Modal.svelte";
 
+  let ready;
   let quote;
   let cryptArray;
-  let solved;
   let revealed = false;
-  let ready;
 
-  $: solved = $answer.join("") === quote ? true : false;
+  $: solved = $answer.join("") === quote;
 
   onMount(() => {
     newQuote();
@@ -30,7 +29,7 @@
 
   function revealAnswer() {
     //if answer was revealed, don't show success modal
-    revealed = true;
+    // revealed = true;
     for (let i = 0; i < quote.length; i++) {
       $answer[i] = quote[i];
     }
@@ -60,7 +59,9 @@
   </div>
 
   {#if solved && !revealed}
-    <Modal {quote} on:closeModal={() => (revealed = true)} />
+    <Modal on:closeModal={() => (revealed = true)}>
+      {quote}
+    </Modal>
   {/if}
 </main>
 
