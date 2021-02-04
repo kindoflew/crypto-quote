@@ -15,7 +15,7 @@
       <slot></slot>
     </p>
     </div>
-    <Button content="Close" clickFunction={() => dispatch('closeModal')} />
+    <Button clickFunction={() => dispatch('closeModal')}> Close </Button>
   </div>
 </section>
 

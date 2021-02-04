@@ -53,9 +53,9 @@
     {/if}
   </section>
   <div class="button-wrapper">
-    <Button content="Reset" clickFunction={reset} />
-    <Button content="Reveal Answer" clickFunction={revealAnswer} />
-    <Button content="New Quote" clickFunction={newQuote} />
+    <Button clickFunction={reset}> Reset </Button>
+    <Button clickFunction={revealAnswer}> Reveal Answer </Button>
+    <Button clickFunction={newQuote}> New Quote </Button>
   </div>
 
   {#if solved && !revealed}

@@ -1,9 +1,8 @@
 <script>
-  export let content;
   export let clickFunction;
 </script>
 
-<button on:click={clickFunction}> {content} </button>
+<button on:click={clickFunction}> <slot></slot> </button>
 
 <style>
   button {
