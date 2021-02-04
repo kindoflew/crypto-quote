@@ -2,10 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import Button from "./Button.svelte";
 
-  export let quote;
-
   const dispatch = createEventDispatcher();
-
 </script>
 
 <svelte:window on:keyup|preventDefault={(e) => e.key === 'Escape' && dispatch('closeModal')}/>
@@ -14,7 +11,9 @@
   <div class="modal">
     <div class="wrapper">
     <p class="message">You did it!</p>
-    <p>{quote}</p>
+    <p>
+      <slot></slot>
+    </p>
     </div>
     <Button content="Close" clickFunction={() => dispatch('closeModal')} />
   </div>
