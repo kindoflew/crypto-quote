@@ -4,6 +4,7 @@
   import { cryptQuote } from "../utils/cryptQuote.js";
   import { answer } from "../utils/store.js";
   import WordInput from "./WordInput.svelte";
+  import LetterInput from "./LetterInput.svelte";
   import Button from "./Button.svelte";
   import Modal from "./Modal.svelte";
 
@@ -29,7 +30,7 @@
 
   function revealAnswer() {
     //if answer was revealed, don't show success modal
-    // revealed = true;
+    revealed = true;
     for (let i = 0; i < quote.length; i++) {
       $answer[i] = quote[i];
     }
@@ -47,8 +48,12 @@
   <section>
     <h1>Crypto.quote()</h1>
     {#if ready}
-      {#each cryptArray as word, index (index)}
-        <WordInput {word} />
+      {#each cryptArray as word, i (i)}
+        <WordInput {word}>
+          {#each word as [character, index] (index)}
+            <LetterInput {character} {index}/>
+          {/each}
+        </WordInput>
       {/each}
     {/if}
   </section>
