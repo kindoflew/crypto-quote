@@ -9,7 +9,7 @@
   <div class="linebreak" />
 {/if}
 <div in:fade class:right-align={hyphen}>
-    <slot></slot>
+  <slot></slot>
 </div>
 
 <style>
