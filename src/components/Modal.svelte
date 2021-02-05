@@ -53,12 +53,13 @@
 
   .message {
     font-size: 3rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    /* margin-top: 0;
+    margin-bottom: 1rem; */
   }
 
   p {
     font-size: 1.5rem;
+    margin: 1.5rem 0 2rem;
   }
 
   @media(max-width: 1000px) {
