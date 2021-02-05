@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { fetchQuote } from "../utils/fetchQuote.js";
   import { cryptQuote } from "../utils/cryptQuote.js";
   import { answer } from "../utils/store.js";
@@ -8,24 +7,18 @@
   import Button from "./Button.svelte";
   import Modal from "./Modal.svelte";
 
-  let ready;
   let quote;
-  let cryptArray;
-  let revealed = false;
-
+  let revealed;
+  let newQuote = initGame();
+  
   $: solved = $answer.join("") === quote;
 
-  onMount(() => {
-    newQuote();
-  });
-
-  async function newQuote() {
-    ready = false;
+  async function initGame() {
     quote = await fetchQuote();
-    cryptArray = cryptQuote(quote);
     answer.set(Array.from({ length: quote.length }, () => ""));
     revealed = false;
-    ready = true;
+    
+    return cryptQuote(quote);
   }
 
   function revealAnswer() {
@@ -47,24 +40,25 @@
 <main>
   <section>
     <h1>Crypto.quote()</h1>
-    {#if ready}
-      {#each cryptArray as word, i (i)}
+    {#await newQuote then cryptQuoteArray}
+      {#each cryptQuoteArray as word, i (i)}
         <WordInput {word}>
           {#each word as [character, index] (index)}
             <LetterInput {character} {index}/>
           {/each}
         </WordInput>
       {/each}
-    {/if}
+      <!-- TODO: error handling -->
+    {/await}
   </section>
   <div class="button-wrapper">
     <Button clickFunction={reset}> Reset </Button>
     <Button clickFunction={revealAnswer}> Reveal Answer </Button>
-    <Button clickFunction={newQuote}> New Quote </Button>
+    <Button clickFunction={() => newQuote = initGame()}> New Quote </Button>
   </div>
 
   {#if solved && !revealed}
-    <Modal on:closeModal={() => (revealed = true)}>
+    <Modal on:closeModal={() => revealed = true}>
       {quote}
     </Modal>
   {/if}
