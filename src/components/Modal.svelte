@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Button from "./Button.svelte";
 
   const dispatch = createEventDispatcher();
 </script>
@@ -15,7 +14,7 @@
       <slot></slot>
     </p>
     </div>
-    <Button clickFunction={() => dispatch('closeModal')}> Close </Button>
+    <button on:click={() => dispatch('closeModal')}> Close </button>
   </div>
 </section>
 

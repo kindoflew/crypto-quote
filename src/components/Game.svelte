@@ -4,7 +4,6 @@
   import { answer } from "../utils/store.js";
   import WordInput from "./WordInput.svelte";
   import LetterInput from "./LetterInput.svelte";
-  import Button from "./Button.svelte";
   import Modal from "./Modal.svelte";
 
   let quote;
@@ -52,9 +51,9 @@
     {/await}
   </section>
   <div class="button-wrapper">
-    <Button clickFunction={reset}> Reset </Button>
-    <Button clickFunction={revealAnswer}> Reveal Answer </Button>
-    <Button clickFunction={() => newQuote = initGame()}> New Quote </Button>
+    <button on:click={reset}> Reset </button>
+    <button on:click={revealAnswer}> Reveal Answer </button>
+    <button on:click={() => newQuote = initGame()}> New Quote </button>
   </div>
 
   {#if solved && !revealed}
@@ -102,6 +101,27 @@
     display: flex;
     width: calc(60vw + 4rem);
     justify-content: space-between;
+  }
+
+  :global(button) {
+    background-color: var(--game-bg);
+    color: var(--font-color);
+    font-size: 1.5rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
+    margin: 0;
+    padding: 1rem;
+  }
+
+  :global(button:hover) {
+    cursor: pointer;
+  }
+
+  :global(button:active) {
+    transform: scale(0.95);
   }
 
   @media (max-width: 1000px) {
