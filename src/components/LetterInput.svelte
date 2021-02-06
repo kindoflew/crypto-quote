@@ -100,10 +100,6 @@
     text-transform: uppercase;
   }
 
-  input:focus {
-    background-color: var(--main-bg);
-  }
-
   .hidden {
     border: none;
     background-color: transparent;
