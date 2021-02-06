@@ -52,8 +52,6 @@
 
   .message {
     font-size: 3rem;
-    /* margin-top: 0;
-    margin-bottom: 1rem; */
   }
 
   p {
