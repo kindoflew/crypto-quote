@@ -4,17 +4,17 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<svelte:window on:keyup|preventDefault={(e) => e.key === 'Escape' && dispatch('closeModal')}/>
- 
-<section on:click|self={() => dispatch('closeModal')}>
+<svelte:window on:keyup|preventDefault={(e) => e.key === "Escape" && dispatch("closeModal")} />
+
+<section on:click|self={() => dispatch("closeModal")}>
   <div class="modal">
     <div class="wrapper">
-    <p class="message">You did it!</p>
-    <p>
-      <slot></slot>
-    </p>
+      <p class="message">You did it!</p>
+      <p>
+        <slot></slot>
+      </p>
     </div>
-    <button on:click={() => dispatch('closeModal')}> Close </button>
+    <button on:click={() => dispatch("closeModal")}> Close </button>
   </div>
 </section>
 
@@ -61,7 +61,7 @@
     margin: 1.5rem 0 2rem;
   }
 
-  @media(max-width: 1000px) {
+  @media (max-width: 1000px) {
     .modal {
       width: 70vw;
     }
