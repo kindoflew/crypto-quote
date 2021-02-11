@@ -1,34 +1,5 @@
-const BASE_CIPHER = {
-  A: "A",
-  B: "B",
-  C: "C",
-  D: "D",
-  E: "E",
-  F: "F",
-  G: "G",
-  H: "H",
-  I: "I",
-  J: "J",
-  K: "K",
-  L: "L",
-  M: "M",
-  N: "N",
-  O: "O",
-  P: "P",
-  Q: "Q",
-  R: "R",
-  S: "S",
-  T: "T",
-  U: "U",
-  V: "V",
-  W: "W",
-  X: "X",
-  Y: "Y",
-  Z: "Z",
-};
-
 export function cryptQuote(string) {
-  const cipher = generateCipher(BASE_CIPHER);
+  let cipher = generateCipher();
   let cryptArr = [];
   string.split("").forEach((character) => {
     if (character.match(/\W/)) {
@@ -40,12 +11,12 @@ export function cryptQuote(string) {
   return quoteMappedByWord(cryptArr);
 }
 
-function generateCipher(obj) {
+function generateCipher() {
   let newObj = {};
-  let keys = Object.keys(obj);
-  let newValues = shuffleArray(Object.values(obj));
+  let keys = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+  let values = shuffleArray(keys);
   for (let i = 0; i < keys.length; i++) {
-    newObj[keys[i]] = newValues[i];
+    newObj[keys[i]] = values[i];
   }
   return newObj;
 }
