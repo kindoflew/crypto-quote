@@ -1,31 +1,26 @@
 <script>
   import { fetchQuote } from "../utils/fetchQuote.js";
   import { cryptQuote } from "../utils/cryptQuote.js";
-  import { answer } from "../utils/store.js";
+  import { quote, answer, solved } from "../utils/store.js";
   import WordInput from "./WordInput.svelte";
   import LetterInput from "./LetterInput.svelte";
   import Modal from "./Modal.svelte";
 
-  let quote;
   let revealed;
   let newQuote = initGame();
-  
-  $: solved = $answer.join("") === quote;
 
   async function initGame() {
-    quote = await fetchQuote();
-    answer.set(Array.from({ length: quote.length }, () => ""));
+    $quote = await fetchQuote();
+    $answer = Array.from({ length: $quote.length }, () => "");
     revealed = false;
     
-    return cryptQuote(quote);
+    return cryptQuote($quote);
   }
 
   function revealAnswer() {
     //if answer was revealed, don't show success modal
     revealed = true;
-    for (let i = 0; i < quote.length; i++) {
-      $answer[i] = quote[i];
-    }
+    $answer = $quote.split("");
   }
 
   function reset() {
@@ -56,9 +51,9 @@
     <button on:click={() => newQuote = initGame()}> New Quote </button>
   </div>
 
-  {#if solved && !revealed}
+  {#if $solved && !revealed}
     <Modal on:closeModal={() => revealed = true}>
-      {quote}
+      {$quote}
     </Modal>
   {/if}
 </main>
