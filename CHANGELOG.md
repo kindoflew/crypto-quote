@@ -1,4 +1,4 @@
-#CHANGELOG
+# CHANGELOG
 
 ### v 1.1.0
 * refactored cryptoQuote module to not use global const to generate cipher
