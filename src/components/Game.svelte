@@ -1,8 +1,8 @@
 <script>
   import { fetchQuote } from "../utils/fetchQuote.js";
-  import { cryptQuote } from "../utils/cryptQuote.js";
-  import { quote, answer, solved } from "../utils/store.js";
-  import WordInput from "./WordInput.svelte";
+  import { cryptoQuote } from "../utils/cryptoQuote.js";
+  import { quote, answer, solved } from "../utils/stores.js";
+  import WordContainer from "./WordContainer.svelte";
   import LetterInput from "./LetterInput.svelte";
   import Modal from "./Modal.svelte";
 
@@ -14,7 +14,7 @@
     $answer = Array.from({ length: $quote.length }, () => "");
     revealed = false;
     
-    return cryptQuote($quote);
+    return cryptoQuote($quote);
   }
 
   function revealAnswer() {
@@ -34,13 +34,13 @@
 <main>
   <section>
     <h1>Crypto.quote()</h1>
-    {#await newQuote then cryptQuoteArray}
-      {#each cryptQuoteArray as word, i (i)}
-        <WordInput {word}>
+    {#await newQuote then cryptoQuoteArray}
+      {#each cryptoQuoteArray as word, i (i)}
+        <WordContainer {word}>
           {#each word as [character, index] (index)}
             <LetterInput {character} {index}/>
           {/each}
-        </WordInput>
+        </WordContainer>
       {/each}
       <!-- TODO: error handling -->
     {/await}
@@ -131,9 +131,9 @@
 
   @media (max-width: 550px) {
     section {
-      width: 85vw;
+      width: 90vw;
       padding-left: 1rem;
-      padding-right: 1rem;
+      padding-right: 0;
     }
 
     .button-wrapper {

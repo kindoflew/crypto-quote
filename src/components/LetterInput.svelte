@@ -1,6 +1,6 @@
 <script>
   import { onMount, tick } from "svelte";
-  import { answer } from "../utils/store.js";
+  import { answer } from "../utils/stores.js";
 
   export let character;
   export let index;

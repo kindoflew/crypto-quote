@@ -1,4 +1,4 @@
-export function cryptQuote(string) {
+export function cryptoQuote(string) {
   let cipher = generateCipher();
   let cryptArr = [];
   string.split("").forEach((character) => {
@@ -25,9 +25,9 @@ function shuffleArray(array) {
   let shuffled = array.slice();
   for (let i = shuffled.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * i);
-    let temp = shuffled[i];
+    let tmp = shuffled[i];
     shuffled[i] = shuffled[j];
-    shuffled[j] = temp;
+    shuffled[j] = tmp;
   }
   return shuffled;
 }
