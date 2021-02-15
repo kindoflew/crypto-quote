@@ -1,22 +1,20 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Button from "./Button.svelte";
-
-  export let quote;
 
   const dispatch = createEventDispatcher();
-
 </script>
 
-<svelte:window on:keyup|preventDefault={(e) => e.key === 'Escape' && dispatch('closeModal')}/>
- 
-<section on:click|self={() => dispatch('closeModal')}>
+<svelte:window on:keyup|preventDefault={(e) => e.key === "Escape" && dispatch("closeModal")} />
+
+<section on:click|self={() => dispatch("closeModal")}>
   <div class="modal">
     <div class="wrapper">
-    <p class="message">You did it!</p>
-    <p>{quote}</p>
+      <p class="message">You did it!</p>
+      <p>
+        <slot></slot>
+      </p>
     </div>
-    <Button content="Close" clickFunction={() => dispatch('closeModal')} />
+    <button on:click={() => dispatch("closeModal")}> Close </button>
   </div>
 </section>
 
@@ -54,15 +52,14 @@
 
   .message {
     font-size: 3rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
   }
 
   p {
     font-size: 1.5rem;
+    margin: 1.5rem 0 2rem;
   }
 
-  @media(max-width: 1000px) {
+  @media (max-width: 1000px) {
     .modal {
       width: 70vw;
     }

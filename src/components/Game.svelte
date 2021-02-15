@@ -1,39 +1,26 @@
 <script>
-  import { onMount } from "svelte";
   import { fetchQuote } from "../utils/fetchQuote.js";
-  import { cryptQuote } from "../utils/cryptQuote.js";
-  import { answer } from "../utils/store.js";
-  import WordInput from "./WordInput.svelte";
-  import Button from "./Button.svelte";
+  import { cryptoQuote } from "../utils/cryptoQuote.js";
+  import { quote, answer, solved } from "../utils/stores.js";
+  import WordContainer from "./WordContainer.svelte";
+  import LetterInput from "./LetterInput.svelte";
   import Modal from "./Modal.svelte";
 
-  let quote;
-  let cryptArray;
-  let solved;
-  let revealed = false;
-  let ready;
+  let revealed;
+  let newQuote = initGame();
 
-  $: solved = $answer.join("") === quote ? true : false;
-
-  onMount(() => {
-    newQuote();
-  });
-
-  async function newQuote() {
-    ready = false;
-    quote = await fetchQuote();
-    cryptArray = cryptQuote(quote);
-    answer.set(Array.from({ length: quote.length }, () => ""));
+  async function initGame() {
+    $quote = await fetchQuote();
+    $answer = Array.from({ length: $quote.length }, () => "");
     revealed = false;
-    ready = true;
+    
+    return cryptoQuote($quote);
   }
 
   function revealAnswer() {
     //if answer was revealed, don't show success modal
     revealed = true;
-    for (let i = 0; i < quote.length; i++) {
-      $answer[i] = quote[i];
-    }
+    $answer = $quote.split("");
   }
 
   function reset() {
@@ -47,20 +34,27 @@
 <main>
   <section>
     <h1>Crypto.quote()</h1>
-    {#if ready}
-      {#each cryptArray as word, index (index)}
-        <WordInput {word} />
+    {#await newQuote then cryptoQuoteArray}
+      {#each cryptoQuoteArray as word, i (i)}
+        <WordContainer {word}>
+          {#each word as [character, index] (index)}
+            <LetterInput {character} {index}/>
+          {/each}
+        </WordContainer>
       {/each}
-    {/if}
+      <!-- TODO: error handling -->
+    {/await}
   </section>
   <div class="button-wrapper">
-    <Button content="Reset" clickFunction={reset} />
-    <Button content="Reveal Answer" clickFunction={revealAnswer} />
-    <Button content="New Quote" clickFunction={newQuote} />
+    <button on:click={reset}> Reset </button>
+    <button on:click={revealAnswer}> Reveal Answer </button>
+    <button on:click={() => newQuote = initGame()}> New Quote </button>
   </div>
 
-  {#if solved && !revealed}
-    <Modal {quote} on:closeModal={() => (revealed = true)} />
+  {#if $solved && !revealed}
+    <Modal on:closeModal={() => revealed = true}>
+      {$quote}
+    </Modal>
   {/if}
 </main>
 
@@ -104,6 +98,27 @@
     justify-content: space-between;
   }
 
+  :global(button) {
+    background-color: var(--game-bg);
+    color: var(--font-color);
+    font-size: 1.5rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(61, 28, 1, 0.612);
+    margin: 0;
+    padding: 1rem;
+  }
+
+  :global(button:hover) {
+    cursor: pointer;
+  }
+
+  :global(button:active) {
+    transform: scale(0.95);
+  }
+
   @media (max-width: 1000px) {
     section {
       width: 80vw;
@@ -116,9 +131,9 @@
 
   @media (max-width: 550px) {
     section {
-      width: 85vw;
+      width: 90vw;
       padding-left: 1rem;
-      padding-right: 1rem;
+      padding-right: 0;
     }
 
     .button-wrapper {

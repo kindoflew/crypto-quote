@@ -1,6 +1,6 @@
 <script>
   import { onMount, tick } from "svelte";
-  import { answer } from "../utils/store.js";
+  import { answer } from "../utils/stores.js";
 
   export let character;
   export let index;
@@ -98,10 +98,6 @@
     box-sizing: border-box;
     text-align: center;
     text-transform: uppercase;
-  }
-
-  input:focus {
-    background-color: var(--main-bg);
   }
 
   .hidden {
