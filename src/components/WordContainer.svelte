@@ -28,7 +28,7 @@
   .right-align {
     flex: 1 1 0;
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
   }
 
   @media (max-width: 700px) {
